@@ -38,4 +38,4 @@ build/
 
 # Ignorar arquivos de configuração do ambiente
 .env
-.env.local
+database.db

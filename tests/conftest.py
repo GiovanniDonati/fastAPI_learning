@@ -9,7 +9,7 @@ from fast_zero.models import table_registry
 
 @pytest.fixture
 def client():
-    return TestClient(app)  # Arrange (organização)
+    return TestClient(app)
 
 
 @pytest.fixture
