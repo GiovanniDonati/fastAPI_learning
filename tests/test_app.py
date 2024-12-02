@@ -1,5 +1,11 @@
 from http import HTTPStatus
 
+from fast_zero.schemas import UserPublic
+
+
+def test_read_root():
+    assert {'message': 'Welcome to my aplicattion!'}
+
 
 def test_create_user(client):
     response = client.post(
@@ -19,6 +25,19 @@ def test_create_user(client):
     }
 
 
+def test_read_users(client):
+    response = client.get('/users/')
+
+    assert response.status_code == HTTPStatus.OK
+    assert response.json() == {'users': []}
+
+
+def test_read_users_with_user(client, user):
+    user_schema = UserPublic.model_validate(user).model_dump()
+    response = client.get('/users/')
+    assert response.json() == {'users': [user_schema]}
+
+
 def test_read_user(client):
     response = client.get('/users/1')
 
@@ -35,21 +54,6 @@ def test_read_user_error(client):
 
     # assert response.status_code == HTTPStatus.OK
     assert response.json() == {'detail': 'User not found'}
-
-
-def test_read_users(client):
-    response = client.get('/users/')
-
-    assert response.status_code == HTTPStatus.OK
-    assert response.json() == {
-        'users': [
-            {
-                'id': 1,
-                'user': 'Giovanni',
-                'email': 'teste@teste.com.br',
-            }
-        ]
-    }
 
 
 def test_update_users(client):
