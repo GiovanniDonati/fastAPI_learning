@@ -25,8 +25,9 @@ def read_users(
 
 
 @app.get('/users/{id}', response_model=UserPublic)
-def read_user(id: int):
-    pass
+def read_user(id: int, session: Session = Depends(get_session)):
+    user = session.scalar(select(User).where(User.id == id))
+    return user
 
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
@@ -59,28 +60,26 @@ def create_user(user: UserSchema, session=Depends(get_session)):
 
 @app.put('/users/{user_id}', response_model=UserPublic)
 def update_user(user_id: int, user: UserSchema, session=Depends(get_session)):
-    db_user = session.scalar(
-        select(User).where(User.id == user_id)
-    )
-    
+    db_user = session.scalar(select(User).where(User.id == user_id))
+
     if not db_user:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND, detail='User not found'
         )
-    
-    db_user.user = user.user    
-    db_user.password = user.password    
-    db_user.email = user.email    
+
+    db_user.user = user.user
+    db_user.password = user.password
+    db_user.email = user.email
     session.commit()
+    session.refresh(db_user)
 
     return db_user
 
+
 @app.delete('/users/{user_id}', response_model=Message)
 def delete_user(user_id: int, session=Depends(get_session)):
-    db_user = session.scalar(
-        select(User).where(User.id == user_id)
-    )
-    
+    db_user = session.scalar(select(User).where(User.id == user_id))
+
     if not db_user:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND, detail='User not found'
@@ -88,3 +87,5 @@ def delete_user(user_id: int, session=Depends(get_session)):
 
     session.delete(db_user)
     session.commit()
+
+    return {'message': 'User deleted!'}

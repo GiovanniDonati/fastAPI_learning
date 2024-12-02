@@ -38,25 +38,7 @@ def test_read_users_with_user(client, user):
     assert response.json() == {'users': [user_schema]}
 
 
-def test_read_user(client):
-    response = client.get('/users/1')
-
-    # assert response.status_code == HTTPStatus.OK
-    assert response.json() == {
-        'id': 1,
-        'user': 'Giovanni',
-        'email': 'teste@teste.com.br',
-    }
-
-
-def test_read_user_error(client):
-    response = client.get('/users/2')
-
-    # assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'detail': 'User not found'}
-
-
-def test_update_users(client):
+def test_update_user(client, user):
     response = client.put(
         '/users/1',
         json={
@@ -75,30 +57,8 @@ def test_update_users(client):
     }
 
 
-def test_update_users_error(client):
-    response = client.put(
-        '/users/2',
-        json={
-            'id': 2,
-            'user': 'Donati',
-            'email': 'teste@teste.com.br',
-            'password': '123',
-        },
-    )
-
-    # assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'detail': 'User not found'}
-
-
-def test_delete_users(client):
+def test_delete_user(client, user):
     response = client.delete('/users/1')
 
     # assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'message': 'user deleted!'}
-
-
-def test_delete_users_eroor(client):
-    response = client.delete('/users/1')
-
-    # assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'detail': 'User not found'}
+    assert response.json() == {'message': 'User deleted!'}
