@@ -37,9 +37,7 @@ lint = 'ruff check . && ruff check . --diff'
 format = 'ruff check . --fix && ruff format .'
 run = 'fastapi dev fast_zero\app.py'
 pre_test = 'task lint'
-testapp = 'pytest -s -x --cov=fast_zero -vv'
-testtest = 'pytest -s --cov=tests -vv'
-test = 'task testapp && task testtest'
+test = 'pytest --cov=. -vv'
 post_test = 'coverage html'
 
 [tool.poetry.group.dev.dependencies]
