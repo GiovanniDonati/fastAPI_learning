@@ -11,6 +11,10 @@ fastapi = {extras = ["standard"], version = "^0.115.5"}
 sqlalchemy = "^2.0.36"
 pydantic-settings = "^2.6.1"
 alembic = "^1.14.0"
+pwdlib = {extras = ["argon2"], version = "^0.2.1"}
+python-multipart = "^0.0.19"
+pyjwt = "^2.10.1"
+tzdata = "^2024.2"
 
 [tool.ruff]
 line-length = 79
@@ -34,7 +38,7 @@ format = 'ruff check . --fix && ruff format .'
 run = 'fastapi dev fast_zero\app.py'
 pre_test = 'task lint'
 testapp = 'pytest -s -x --cov=fast_zero -vv'
-testtest = 'pytest -s -x --cov=tests -vv'
+testtest = 'pytest -s --cov=tests -vv'
 test = 'task testapp && task testtest'
 post_test = 'coverage html'
 
