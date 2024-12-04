@@ -18,9 +18,7 @@ pwd_context = PasswordHash.recommended()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/token')
 
-print('Passei aqui')
 settings = Settings()
-print(settings.ALGORITHM)
 
 
 def get_password_hash(password: str):

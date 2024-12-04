@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fast_zero.routes import auth, users
 from fast_zero.schemas import Message
 
-app = FastAPI()
+app = FastAPI(title='Expedition Control', version='version_dev')
 app.include_router(auth.router)
 app.include_router(users.router)
 
