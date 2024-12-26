@@ -12,6 +12,7 @@ fastapi = {extras = ["standard"], version = "^0.115.6"}
 sqlalchemy = "^2.0.36"
 pydantic-settings = "^2.7.0"
 alembic = "^1.14.0"
+<<<<<<< HEAD
 pyjwt = "^2.10.1"
 pwdlib = {extras = ["argon2"], version = "^0.2.1"}
 tzdata = "^2024.2"
@@ -24,6 +25,12 @@ ruff = "^0.8.4"
 httpx = "^0.28.1"
 factory-boy = "^3.3.1"
 freezegun = "^1.5.1"
+=======
+pwdlib = {extras = ["argon2"], version = "^0.2.1"}
+python-multipart = "^0.0.19"
+pyjwt = "^2.10.1"
+tzdata = "^2024.2"
+>>>>>>> e86f40ec1b724c3ac842dfe055c887bf307915c6
 
 [tool.ruff]
 line-length = 79
@@ -46,7 +53,7 @@ lint = 'ruff check .; ruff check . --diff'
 format = 'ruff check . --fix ruff format .'
 run = 'fastapi dev fast_zero/app.py'
 pre_test = 'task lint'
-test = 'pytest -s -x --cov=fast_zero -vv'
+test = 'pytest --cov=. -vv'
 post_test = 'coverage html'
 
 [build-system]

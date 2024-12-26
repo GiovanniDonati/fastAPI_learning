@@ -44,6 +44,7 @@ def session():
 @pytest.fixture
 def user(session):
     password = 'testtest'
+<<<<<<< HEAD
     user = UserFactory(password=get_password_hash(password))
 
     session.add(user)
@@ -80,6 +81,13 @@ def other_user(session):
     password = 'testtest'
     user = UserFactory(password=get_password_hash(password))
 
+=======
+    user = User(
+        user='Teste',
+        email='teste@test.com',
+        password=get_password_hash(password),
+    )
+>>>>>>> e86f40ec1b724c3ac842dfe055c887bf307915c6
     session.add(user)
     session.commit()
     session.refresh(user)
@@ -96,6 +104,7 @@ def token(client, user):
         data={'username': user.email, 'password': user.clean_password},
     )
     return response.json()['access_token']
+<<<<<<< HEAD
 
 
 class UserFactory(factory.Factory):
@@ -105,3 +114,5 @@ class UserFactory(factory.Factory):
     username = factory.Sequence(lambda n: f'test{n}')
     email = factory.LazyAttribute(lambda obj: f'{obj.username}@test.com')
     password = factory.LazyAttribute(lambda obj: f'{obj.username}@example.com')
+=======
+>>>>>>> e86f40ec1b724c3ac842dfe055c887bf307915c6

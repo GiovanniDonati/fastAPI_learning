@@ -1,13 +1,17 @@
 from http import HTTPStatus
 
+<<<<<<< HEAD
 from freezegun import freeze_time
 
+=======
+>>>>>>> e86f40ec1b724c3ac842dfe055c887bf307915c6
 
 def test_get_token(client, user):
     response = client.post(
         '/auth/token',
         data={'username': user.email, 'password': user.clean_password},
     )
+<<<<<<< HEAD
     token = response.json()
 
     assert response.status_code == HTTPStatus.OK
@@ -86,3 +90,10 @@ def test_token_expired_dont_refresh(client, user):
         )
         assert response.status_code == HTTPStatus.UNAUTHORIZED
         assert response.json() == {'detail': 'Could not validate credentials'}
+=======
+
+    token = response.json()
+    assert response.status_code == HTTPStatus.OK
+    assert token['token_type'] == 'bearer'
+    assert 'access_token' in token
+>>>>>>> e86f40ec1b724c3ac842dfe055c887bf307915c6

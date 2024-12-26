@@ -25,6 +25,7 @@ class UserList(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+<<<<<<< HEAD
 
 
 class TokenData(BaseModel):
@@ -34,3 +35,5 @@ class TokenData(BaseModel):
 class FilterPage(BaseModel):
     offset: int = 0
     limit: int = 100
+=======
+>>>>>>> e86f40ec1b724c3ac842dfe055c887bf307915c6
